@@ -1,9 +1,0 @@
-{
-  "state" : 1,
-  "data" : {
-    "serviceCode" : "SERVER000001",
-    "servicePass" : "PASStesttesttest",
-    "successMsg" : "恭喜您，已完成激活，请登录U8C系统下载许可文件，就可以开通我们的产品了！"
-  },
-  "message" : "硬件锁文件非法"
-}

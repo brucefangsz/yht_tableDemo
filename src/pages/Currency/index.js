@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'mirrorx';
 import {
     Row,
     Col,
@@ -10,17 +11,15 @@ import {
     Form,
     FormControl,
     FormGroup,
-    InputGroup
+    InputGroup,
+    Icon,
+    Input,
+    Popconfirm,
+    Animate,
+    ControlLabel
 } from 'tinper-bee';
 
-import fetchJsonp from 'fetch-jsonp';
-import ControlLabel from 'bee-control-label';
-import { LoadingTable } from 'components/LoadingTable';
-import Animate from "bee-animate";
-import Icon from "bee-icon";
-import Input from "bee-form-control";
-import Popconfirm from "bee-popconfirm";
-import './index.less';
+import './index.css';
 const Children = [];
 let self;
 
@@ -229,18 +228,7 @@ class AddList extends Component {
         // }).then(function (res) {
         //     console.log(res);
         // });
-        fetchJsonp('https://api.douban.com/v2/book/search?q=javascript&count=1')
-            .then((res) => {
-                return res.json();
-            }).then((data) => {
-                data.books[0].tags.forEach((i, index) => {
-                    console.log(i.key = index);
-                })
-                this.setState({ dataLink: data.books[0].tags });
-                console.log(data.books[0].tags)
-            }).catch((e) => {
-                alert(e);
-            })
+
     }
     onCellChange = (index, key) => {
         return value => {
@@ -366,6 +354,7 @@ class AddList extends Component {
         var data = this.state, tac = { 'text-align': 'right' }, mt = { 'margin-top': '10px' }, lmt = { 'margin-top': '18px' }
         return (
             <div>
+                <Link to="/">首页</Link>
                 <Modal
                     show={this.state.showModal}
                     onHide={this.close} >
@@ -404,14 +393,6 @@ class AddList extends Component {
                     getBodyWrapper={this.getBodyWrapper}
                     onRowClick={this.rowClick}
                 />
-
-                {/*<Table
-                    bordered
-                    data={dataLink}
-                    columns={columnsLink}
-                    getBodyWrapper={this.getBodyWrapper}
-                    onRowClick={this.rowClick}
-                />*/}
             </div>
         );
     }

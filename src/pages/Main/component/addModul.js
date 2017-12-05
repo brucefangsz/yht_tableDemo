@@ -49,11 +49,13 @@ export default class AddModul extends Component {
         console.log(flag);
         console.log(obj);
     }
+    // 修改表格数据
     changeVal = (val, e) => {
         this.setState({
             [val]: e.target.value
         })
     }
+    // 添加数据
     addData = () => {
         let {mName, mUser, children_data} = this.state,
             data = { 'mName': mName, 'mUser': mUser, 'childData': children_data }
@@ -62,7 +64,6 @@ export default class AddModul extends Component {
     }
     // 点击行
     onRowClick = (record, index, e) => {
-        // console.log(index)
         this.setState({
             curIndex: index
         })

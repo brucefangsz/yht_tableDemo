@@ -1,12 +1,12 @@
+/*
+ * 配置数据模拟
+*/
+
 module.exports = {
   "GET": [{
-    "/userInfo/:id": "./mock/api/user/userinfo.json",
-  }, {
-    "/apptenant/app/pageTenantRes": "./mock/web/getCloudStateList.json"
+    "/User/Get": "./mock/api/user/get.json"
   }],
-  "POST": [
-    {
-      "/apptenant/web/u8c/active": "./mock/web/u8c/active.json"
-    }
-  ]
+  "POST": [{
+    "/User/Post": "./mock/api/user/post.json"
+  }]
 }

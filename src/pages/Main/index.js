@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import MenuList from 'components/Menu';
-import MyHeader from 'components/Header';
 import classnames from 'classnames';
 import { Table, Pagination } from "tinper-bee";
 // 内部组件
@@ -9,7 +7,7 @@ import Logo from "./component/icon";
 import AddModul from "./component/addModul";
 import SearchModul from "./component/searchModul";
 import EditHandle from "./component/editHandle";
-
+import {Link} from 'mirrorx';
 const tableColumns = [
     {
         dataIndex: 'description',
@@ -67,7 +65,6 @@ const tableColumns = [
         title: '联系电话'
     }
 ];
-
 const columnsChild = [
     { title: "备注", dataIndex: "productdesc", key: "productdesc" },
     { title: "产品", dataIndex: "productname", key: "productname" },
@@ -236,51 +233,42 @@ export default class Main extends Component {
         let sh = { height: '100%' },
             {toggle, isAddData, isSearch, tableData, isEdit} = this.state;
         return (
-            <div style={sh}>
-                <div className={classnames("side-bar", { "toggled": toggle })}>
-                    <Logo toggle={toggle} />
-                    <MenuList toggle={toggle} />
-                </div>
-                <div className={classnames("content", { "toggled": toggle })}>
-                    <MyHeader toggle={toggle} onToggle={this.handleToggle} />
+            <div>
+                <Link to="/">首页</Link>
+                <EditModul
+                    addData={this.addData}
+                    deleteData={this.deleteData}
+                    handleEdit={this.handleEdit}
+                    frozen={this.frozen}
+                    cancelFrozen={this.cancelFrozen} />
+                <EditHandle
+                    isEdit={isEdit}
+                    cancelEdit={this.cancelEdit} />
+                <AddModul
+                    isAddData={isAddData}
+                    cancelAdd={this.cancelAdd}
+                    addButton={this.addButton} />
+                <div>{isAddData ? "" :
                     <div>
-                        <EditModul
-                            addData={this.addData}
-                            deleteData={this.deleteData}
-                            handleEdit={this.handleEdit}
-                            frozen={this.frozen}
-                            cancelFrozen={this.cancelFrozen} />
-                        <EditHandle
-                            isEdit={isEdit}
-                            cancelEdit={this.cancelEdit} />
-                        <AddModul
-                            isAddData={isAddData}
-                            cancelAdd={this.cancelAdd}
-                            addButton={this.addButton} />
-                        <div>{isAddData ? "" :
-                            <div>
-                                <SearchModul
-                                    isSearch={isSearch} />
-                                <Table
-                                    style={{ width: '100%' }}
-                                    columns={tableColumns}
-                                    data={tableData}
-                                    onRowClick={this.rowclick}
-                                    title={currentData => <div>标题: 我是主表</div>}
-                                />
-                                <Table
-                                    style={{ marginTop: 40 }}
-                                    columns={columnsChild}
-                                    data={this.state.children_data}
-                                    title={currentData => <div>标题: 我是子表</div>}
-                                />
-                            </div>
-                        }</div>
-
+                        <SearchModul
+                            isSearch={isSearch} />
+                        <Table
+                            style={{ width: '100%' }}
+                            columns={tableColumns}
+                            data={tableData}
+                            onRowClick={this.rowclick}
+                            title={currentData => <div>标题: 我是主表</div>}
+                        />
+                        <Table
+                            style={{ marginTop: 40 }}
+                            columns={columnsChild}
+                            data={this.state.children_data}
+                            title={currentData => <div>标题: 我是子表</div>}
+                        />
                     </div>
-                </div>
-            </div>
+                }</div>
 
+            </div>
         );
     }
 }

@@ -17,7 +17,7 @@ const prodChunks = [];
 //服务器启动IP与端口
 const svrConfig = {
   host: "127.0.0.1",
-  port: 3222,
+  port: 4000,
   //是否开启静默模式？true开启，紧显示错误和警告，如要看信息为false。
   noInfo: false
 };
@@ -36,12 +36,12 @@ const proxyConfig = [{
 
 //静态资源托管设置
 const staticConfig = {
-  folder : "src/docs"
+  folder : "src/static"
 };
 
 //dev多入口配置
-glob.sync("./src/home/*/index.js").forEach(path => {
-  const chunk = path.split("./src/home/")[1].split("/index.js")[0];
+glob.sync("./src/pages/*/index.js").forEach(path => {
+  const chunk = path.split("./src/pages/")[1].split("/index.js")[0];
   entries[chunk] = [path, hotMiddlewareScript];
   chunks.push(chunk);
 });
@@ -58,7 +58,7 @@ var devConfig = {
   },
   externals: {
     "react": "React",
-    "react-dom": "ReactDOM"
+    "react-dom": "ReactDOM",
   },
   module: {
     rules: [{
@@ -101,6 +101,7 @@ var devConfig = {
     }]
   },
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new CommonsChunkPlugin({
       name: "vendors",
       filename: "vendors.js",
@@ -118,7 +119,7 @@ var devConfig = {
   ],
   resolve: {
     extensions: [
-      ".js", ".jsx"
+      ".js", "jsx"
     ],
     alias: {
       components: path.resolve(__dirname, "src/components/"),
@@ -130,14 +131,14 @@ var devConfig = {
 
 
 //多页面配置
-glob.sync("./src/home/*/*.html").forEach(path => {
-  const chunk = path.split("./src/home/")[1].split("/index.html")[0];
+glob.sync("./src/pages/*/*.html").forEach(path => {
+  const chunk = path.split("./src/pages/")[1].split("/index.html")[0];
   const filename = chunk + ".html";
   const htmlConf = {
     filename: filename,
     template: path,
     inject: "body",
-    //favicon: "./src/assets/images/favicon.png",
+    favicon: "./src/assets/images/favicon.png",
     hash: true,
     chunks: ["vendors", chunk]
   }
@@ -147,8 +148,8 @@ glob.sync("./src/home/*/*.html").forEach(path => {
 
 
 //product多入口配置
-glob.sync("./src/home/*/index.js").forEach(path => {
-  const chunk = path.split("./src/home/")[1].split("/index.js")[0];
+glob.sync("./src/pages/*/index.js").forEach(path => {
+  const chunk = path.split("./src/pages/")[1].split("/index.js")[0];
   prodEntries[chunk] = [path];
   prodChunks.push(chunk);
 });
@@ -163,7 +164,7 @@ var prodConfig = {
   },
   externals: {
     "react": "React",
-    "react-dom": "ReactDOM"
+    "react-dom": "ReactDOM",
   },
   module: {
     rules: [{
@@ -236,14 +237,14 @@ var prodConfig = {
 }
 
 //多页面配置
-glob.sync("./src/home/*/*.html").forEach(path => {
-  const chunk = path.split("./src/home/")[1].split("/index.html")[0];
+glob.sync("./src/pages/*/*.html").forEach(path => {
+  const chunk = path.split("./src/pages/")[1].split("/index.html")[0];
   const filename = chunk + ".html";
   const htmlConf = {
     filename: filename,
     template: path,
     inject: "body",
-    //favicon: "./src/assets/images/favicon.png",
+    favicon: "./src/assets/images/favicon.png",
     hash: true,
     chunks: ["vendors", chunk]
   }

@@ -1,11 +1,10 @@
 {
-  "message": "success",
-  "flat": 1,
+  "result": true,
   "data": [{
-    "id": 1,
-    "name": "Jay"
+    "name": "kart",
+    "age": 10
   },{
-    "id": 2,
-    "name": "Kvkens"
+    "name": "monster",
+    "age": 15
   }]
 }
